@@ -7,15 +7,21 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 	
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:application.properties"></property>
+	</bean>
+	
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="com.mylearning.ssapi.dao.hibernateimpl,com.mylearning.ssapi.services"></context:component-scan>	
 		
 		
 	<bean id="oracleDatasource"  class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-        <property name="username" value="kart"/>
-        <property name="password" value="app"/>
+        <property name="driverClassName" value="${ss-db-jdbc-dirver}"/>
+        <property name="url" value="${ss-db-jdbc-url}"/>
+        <property name="username" value="${ss-db-jdbc-username}"/>
+        <property name="password" value="${ss-db-jdbc-password}"/>
         <property name="maxTotal" value="1"/>
     </bean>
     
@@ -25,13 +31,13 @@
         <property name="packagesToScan" value="com.mylearning.ssapi.bean"/>
         <property name="hibernateProperties">
         	<props>
-        		<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
-        		<prop key="hibernate.show_sql">true</prop>
+        		<prop key="hibernate.dialect">${ss-db-hib-dialect}</prop>
+        		<prop key="hibernate.show_sql">${ss-db-hib-show-sql}</prop>
         		<prop key="hibernate.hbm2ddl.auto">validate</prop>
-        		<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
-        		<prop key="hibernate.cache.use_second_level_cache">true</prop>
-        		<prop key="hibernate.cache.use_query_cache">true</prop>
-        		<prop key="net.sf.ehcache.configurationResourceName">/myehcache.xml</prop>
+        		<prop key="hibernate.cache.region.factory_class">${ss-db-hib-cache.region.factory_class}</prop>
+        		<prop key="hibernate.cache.use_second_level_cache">${ss-db-hib-cache.use_second_level_cache}</prop>
+        		<prop key="hibernate.cache.use_query_cache">${ss-db-hib-cache.use_query_cache}</prop>
+        		<prop key="net.sf.ehcache.configurationResourceName">${ss-db-hib-ehcache.configurationResourceName}</prop>
         	</props>
         </property>
     </bean>
