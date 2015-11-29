@@ -29,18 +29,11 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(value="/add",method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer){
 		customerService.addCustomer(customer);
 		return new ResponseEntity<Customer>(HttpStatus.CREATED);
 	}
-	
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public Customer getCustomer(@PathVariable int id){
-		return customerService.getCustomer(id);
-	}
-	
 	
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -49,6 +42,10 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(HttpStatus.ACCEPTED);
 	}
 	
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public Customer getCustomer(@PathVariable int id){
+		return customerService.getCustomer(id);
+	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Customer> deleteCustomer(@PathVariable int id){

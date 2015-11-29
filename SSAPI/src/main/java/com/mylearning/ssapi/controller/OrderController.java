@@ -30,18 +30,11 @@ public class OrderController {
 	}
 	
 	
-	@RequestMapping(value="/add",method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Order> addOrder(@RequestBody Order order){
 		orderservice.addOrder(order);
 		return new ResponseEntity<Order>(HttpStatus.CREATED);
 	}
-	
-	
-	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public Order getOrder(@PathVariable int id){
-		return orderservice.getOrder(id);
-	}
-	
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Order> updateOrder(@RequestBody Order order){
@@ -49,13 +42,14 @@ public class OrderController {
 		return new ResponseEntity<Order>(HttpStatus.ACCEPTED);
 	}
 	
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public Order getOrder(@PathVariable int id){
+		return orderservice.getOrder(id);
+	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	public ResponseEntity<Order> deleteOrder(@PathVariable int id){
 		orderservice.deleteOrder(id);
 		return new ResponseEntity<Order>(HttpStatus.ACCEPTED);
 	}
-	
-	
-	
 }

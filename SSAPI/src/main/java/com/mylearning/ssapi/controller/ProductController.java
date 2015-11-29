@@ -22,37 +22,18 @@ public class ProductController {
 
 	@Inject
 	private ProductService productService;
-
-
-
-
-	// @ResponseBody is an optional in @RestController but not in @Controller
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Product> listProducts(){
 		return productService.getProducts();
 	}
 
 
-
-
-
-	@RequestMapping(value={"/add"},method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.PUT)
 	public ResponseEntity<Product> addProduct(@RequestBody Product product){
 		productService.addProduct(product);
 		return new ResponseEntity<Product>(HttpStatus.CREATED);
 	}
-
-
-
-
-
-	@RequestMapping(value={"/{id}"},method=RequestMethod.GET)
-	public Product getProduct(@PathVariable Integer id){
-		return productService.getProduct(id);
-	}
-
-
-
 
 
 	@RequestMapping(method=RequestMethod.POST)
@@ -60,8 +41,12 @@ public class ProductController {
 		productService.updateProduct(product);
 		return new ResponseEntity<Product>(HttpStatus.ACCEPTED);
 	}
+	
 
-
+	@RequestMapping(value={"/{id}"},method=RequestMethod.GET)
+	public Product getProduct(@PathVariable Integer id){
+		return productService.getProduct(id);
+	}
 
 
 	@RequestMapping(value={"/{id}"},method=RequestMethod.DELETE)
@@ -70,5 +55,5 @@ public class ProductController {
 		return new ResponseEntity<Product>(HttpStatus.ACCEPTED);
 	}
 
-
+	
 }
