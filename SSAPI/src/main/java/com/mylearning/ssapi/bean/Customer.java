@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  *
- * @author Rajes
+ * @author Rajes d
  */
 @Entity
 @Table(name = "DEMO_CUSTOMERS")
